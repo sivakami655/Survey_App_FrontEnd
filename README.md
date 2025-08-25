@@ -1,69 +1,72 @@
-# Survey Application
+# Frontend (React)
 
-A full-stack survey application with user authentication, dynamic survey questions, and a modern UI.
+This is the frontend for the Survey Application, built with React and TypeScript.
 
 ## Features
-- User registration and login with JWT authentication
-- Survey with multiple question types (text, single-choice, multi-choice)
-- Required and optional questions
-- Progress bar for survey completion
-- Local response storage and review
-- Modern UI with React, Tailwind CSS, and purple gradient theming
-
-## Tech Stack
-- **Frontend:** React (TypeScript), Tailwind CSS
-- **Backend:** Node.js, Express, TypeScript, Prisma ORM
-- **Database:** PostgreSQL
+- User registration and login
+- Dynamic survey with text, single-choice, and multi-choice questions
+- Required question validation
+- Progress bar and modern UI (Tailwind CSS)
+- Local response review after survey completion
 
 ## Getting Started
 
 ### Prerequisites
 - Node.js (v16+ recommended)
 - npm or yarn
-- PostgreSQL
 
-### Backend Setup
+### Setup
 1. Install dependencies:
-   ```bash
-   cd server
-   npm install
-   ```
-2. Configure your database in `.env` (see `.env.example`).
-3. Run Prisma migrations:
-   ```bash
-   npx prisma migrate dev --name init
-   ```
-4. Start the backend server:
-   ```bash
-   npm run dev
-   ```
-
-### Frontend Setup
-1. Install dependencies:
-   ```bash
-   cd my-app
-   npm install
-   ```
+	```bash
+	npm install
+	```
 2. Start the frontend:
-   ```bash
-   npm start
-   ```
-
-### Usage
-- Register a new user or login with existing credentials.
-- Complete the survey, answering required questions.
-- View your responses after finishing the survey.
+	```bash
+	npm start
+	```
 
 ## Folder Structure
 ```
-Survey Application/
-├── my-app/         # React frontend
-├── server/        # Node.js/Express backend
+my-app/
+├── src/
+│   ├── components/
+│   ├── api/
+│   └── ...
+├── public/
+└── ...
 ```
 
 ## Customization
-- Edit survey questions in the database or via backend logic.
-- Adjust UI colors and layout in the React components and Tailwind config.
+- Edit survey UI and logic in `src/components/Survey.tsx`.
+- Adjust theme/colors in Tailwind config or component classes.
+
+## Components and Files Overview
+
+### `src/components/`
+- **Register.tsx**: Registration form for new users. Handles validation, error display, and calls the backend API to register a user.
+- **Login.tsx**: Login form for existing users. Handles validation, error display, and calls the backend API to authenticate. Stores the JWT token in localStorage.
+- **Survey.tsx**: Main survey component. Fetches questions, manages survey state, validates required questions, displays a progress bar, and shows user responses after completion.
+- **accessTab.tsx**: Tabbed interface for switching between Register and Login. Manages authentication state and renders the Survey component after login.
+
+### `src/api/`
+- **api.ts**: Contains all API functions for communicating with the backend (register, login, getQuestions, submitResponse, etc.). Handles fetch requests and error management.
+
+### `public/`
+- **index.html**: Main HTML file loaded by React. Contains the root div and meta tags.
+- **favicon.ico**, **logo.svg**, etc.: Static assets for branding and icons.
+
+### Root Files
+- **package.json**: Lists project dependencies and scripts.
+- **tsconfig.json**: TypeScript configuration.
+- **tailwind.config.js**: Tailwind CSS configuration.
+- **postcss.config.js**: PostCSS configuration for Tailwind.
+- **README.md**: Project documentation (this file).
+- **.gitignore**: Specifies files/folders to exclude from git.
+- **.env.example**: Example environment variables (never commit real `.env`).
+
+---
+
+Each component and file is modular and focused on a single responsibility, making the codebase easy to maintain and extend.
 
 ## License
 MIT
